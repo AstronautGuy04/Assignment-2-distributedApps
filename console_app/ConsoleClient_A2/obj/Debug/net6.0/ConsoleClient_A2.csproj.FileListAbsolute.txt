@@ -1,0 +1,17 @@
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\bin\Debug\net6.0\ConsoleClient_A2.exe
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\bin\Debug\net6.0\ConsoleClient_A2.deps.json
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\bin\Debug\net6.0\ConsoleClient_A2.runtimeconfig.json
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\bin\Debug\net6.0\ConsoleClient_A2.dll
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\bin\Debug\net6.0\ConsoleClient_A2.pdb
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\obj\Debug\net6.0\ConsoleClient_A2.csproj.AssemblyReference.cache
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\obj\Debug\net6.0\ConsoleClient_A2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\obj\Debug\net6.0\ConsoleClient_A2.AssemblyInfoInputs.cache
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\obj\Debug\net6.0\ConsoleClient_A2.AssemblyInfo.cs
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\obj\Debug\net6.0\ConsoleClient_A2.csproj.CoreCompileInputs.cache
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\obj\Debug\net6.0\ConsoleC.CAF6D7CC.Up2Date
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\obj\Debug\net6.0\ConsoleClient_A2.dll
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\obj\Debug\net6.0\refint\ConsoleClient_A2.dll
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\obj\Debug\net6.0\ConsoleClient_A2.pdb
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\obj\Debug\net6.0\ConsoleClient_A2.genruntimeconfig.cache
+C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment_2\console_app\ConsoleClient_A2\obj\Debug\net6.0\ref\ConsoleClient_A2.dll
