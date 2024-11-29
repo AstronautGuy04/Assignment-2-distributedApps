@@ -1,4 +1,8 @@
-const express = require('express')
-const app = express()
-app.get('/test', (req, res) => res.json({ msg: 'Working!' }))
-module.exports = app
+{
+    "name": "greetings-api",
+    "version": "1.0.0",
+    "main": "app.js",
+    "dependencies": {
+      "express": "^4.18.2"
+    }
+  }
