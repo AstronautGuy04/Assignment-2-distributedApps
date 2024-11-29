@@ -1,10 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const greetings = require('../data/greetings');
+
+// In-memory data
+const greetings = [
+    { timeOfDay: 'Morning', language: 'English', greetingMessage: 'Good morning', tone: 'Casual' },
+    { timeOfDay: 'Morning', language: 'English', greetingMessage: 'I wish you a pleasant morning', tone: 'Formal' },
+    // Add other greetings...
+];
 
 router.get('/timesOfDay', (req, res) => {
-    const times = [...new Set(greetings.map(g => g.timeOfDay))];
-    res.json({ timesOfDay: times });
+    const timesOfDay = [...new Set(greetings.map(g => g.timeOfDay))];
+    res.json({ timesOfDay });
 });
 
 router.get('/languages', (req, res) => {
@@ -19,7 +25,7 @@ router.get('/tones', (req, res) => {
 
 router.post('/greet', (req, res) => {
     const { timeOfDay, language, tone } = req.body;
-
+    
     if (!timeOfDay || !language || !tone) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
@@ -32,8 +38,8 @@ router.post('/greet', (req, res) => {
 
     if (!greeting) {
         return res.status(404).json({
-            error: 'Greeting not found',
-            details: `No greeting found for timeOfDay: ${timeOfDay}, language: ${language}, tone: ${tone}`
+            error: 'Not found',
+            message: `No greeting found for timeOfDay: ${timeOfDay}, language: ${language}, tone: ${tone}`
         });
     }
 
