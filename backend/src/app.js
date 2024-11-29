@@ -6,12 +6,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-// API Routes
+// Routes
 app.use('/', greetingRoutes);
-
-// Root route
-app.get('/', (req, res) => {
-    res.json({ message: 'Welcome to the Greetings API!' });
-});
 
 module.exports = app;

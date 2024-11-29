@@ -1,16 +1,2 @@
-const express = require('express');
-
-const app = express();
-app.use(express.json());
-
-// Test route
-app.get('/test', (req, res) => {
-    res.json({ message: 'API is working!' });
-});
-
-// Root route
-app.get('/', (req, res) => {
-    res.json({ message: 'Welcome to the Greetings API!' });
-});
-
+const app = require('../src/app.js');
 module.exports = app;
