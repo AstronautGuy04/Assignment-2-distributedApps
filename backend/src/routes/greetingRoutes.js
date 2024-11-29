@@ -1,125 +1,92 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../database');
-const { GreetingRequest, GreetingResponse } = require('../models/greeting');
-const { validateGreetingRequest } = require('../middleware/validateRequest');
+const { initializeDatabase } = require('../database');
 
-/**
- * POST /api/greet
- * Gets a greeting based on timeOfDay, language, and tone
- */
-router.post('/greet', validateGreetingRequest, (req, res) => {
-    const { timeOfDay, language, tone } = req.greetingRequest;
-
-    // Query the database for the matching greeting
-    db.get(
-        `SELECT greetingMessage 
-         FROM greetings 
-         WHERE timeOfDay = ? AND language = ? AND tone = ?`,
-        [timeOfDay, language, tone],
-        (err, row) => {
+// GET /timesOfDay
+router.get('/timesOfDay', async (req, res) => {
+    try {
+        const db = await initializeDatabase();
+        db.all('SELECT DISTINCT timeOfDay FROM greetings ORDER BY timeOfDay', [], (err, rows) => {
             if (err) {
-                console.error('Database error:', err);
-                return res.status(500).json({
-                    error: 'Internal server error',
-                    details: 'Failed to retrieve greeting'
-                });
+                res.status(500).json({ error: 'Database error', details: err.message });
+                return;
             }
-
-            if (!row) {
-                return res.status(404).json({
-                    error: 'Greeting not found',
-                    details: `No greeting found for timeOfDay: ${timeOfDay}, language: ${language}, tone: ${tone}`
-                });
-            }
-
-            const response = new GreetingResponse(row.greetingMessage);
-            res.json(response.toJson());
-        }
-    );
+            res.json({ timesOfDay: rows.map(row => row.timeOfDay) });
+            db.close();
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Database initialization error', details: error.message });
+    }
 });
 
-/**
- * GET /api/timesOfDay
- * Returns all available times of day
- */
-router.get('/timesOfDay', (req, res) => {
-    db.all(
-        `SELECT DISTINCT timeOfDay 
-         FROM greetings 
-         ORDER BY 
-            CASE timeOfDay 
-                WHEN 'Morning' THEN 1 
-                WHEN 'Afternoon' THEN 2 
-                WHEN 'Evening' THEN 3 
-            END`,
-        [],
-        (err, rows) => {
+// GET /languages
+router.get('/languages', async (req, res) => {
+    try {
+        const db = await initializeDatabase();
+        db.all('SELECT DISTINCT language FROM greetings ORDER BY language', [], (err, rows) => {
             if (err) {
-                console.error('Database error:', err);
-                return res.status(500).json({
-                    error: 'Internal server error',
-                    details: 'Failed to retrieve times of day'
-                });
+                res.status(500).json({ error: 'Database error', details: err.message });
+                return;
             }
-
-            res.json({
-                timesOfDay: rows.map(row => row.timeOfDay)
-            });
-        }
-    );
+            res.json({ languages: rows.map(row => row.language) });
+            db.close();
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Database initialization error', details: error.message });
+    }
 });
 
-/**
- * GET /api/languages
- * Returns all supported languages
- */
-router.get('/languages', (req, res) => {
-    db.all(
-        `SELECT DISTINCT language 
-         FROM greetings 
-         ORDER BY language`,
-        [],
-        (err, rows) => {
+// GET /tones
+router.get('/tones', async (req, res) => {
+    try {
+        const db = await initializeDatabase();
+        db.all('SELECT DISTINCT tone FROM greetings ORDER BY tone', [], (err, rows) => {
             if (err) {
-                console.error('Database error:', err);
-                return res.status(500).json({
-                    error: 'Internal server error',
-                    details: 'Failed to retrieve languages'
-                });
+                res.status(500).json({ error: 'Database error', details: err.message });
+                return;
             }
-
-            res.json({
-                languages: rows.map(row => row.language)
-            });
-        }
-    );
+            res.json({ tones: rows.map(row => row.tone) });
+            db.close();
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Database initialization error', details: error.message });
+    }
 });
 
-/**
- * GET /api/tones
- * Returns all supported tones (added for completeness)
- */
-router.get('/tones', (req, res) => {
-    db.all(
-        `SELECT DISTINCT tone 
-         FROM greetings 
-         ORDER BY tone`,
-        [],
-        (err, rows) => {
-            if (err) {
-                console.error('Database error:', err);
-                return res.status(500).json({
-                    error: 'Internal server error',
-                    details: 'Failed to retrieve tones'
-                });
-            }
+// POST /greet
+router.post('/greet', async (req, res) => {
+    const { timeOfDay, language, tone } = req.body;
 
-            res.json({
-                tones: rows.map(row => row.tone)
-            });
-        }
-    );
+    if (!timeOfDay || !language || !tone) {
+        return res.status(400).json({
+            error: 'Missing required fields'
+        });
+    }
+
+    try {
+        const db = await initializeDatabase();
+        db.get(
+            'SELECT greetingMessage FROM greetings WHERE timeOfDay = ? AND language = ? AND tone = ?',
+            [timeOfDay, language, tone],
+            (err, row) => {
+                if (err) {
+                    res.status(500).json({ error: 'Database error', details: err.message });
+                    return;
+                }
+                if (!row) {
+                    res.status(404).json({
+                        error: 'Greeting not found',
+                        details: `No greeting found for timeOfDay: ${timeOfDay}, language: ${language}, tone: ${tone}`
+                    });
+                    return;
+                }
+                res.json({ greetingMessage: row.greetingMessage });
+                db.close();
+            }
+        );
+    } catch (error) {
+        res.status(500).json({ error: 'Database initialization error', details: error.message });
+    }
 });
 
 module.exports = router;

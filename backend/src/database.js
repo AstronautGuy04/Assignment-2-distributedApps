@@ -1,51 +1,50 @@
-const sqlite3 = require('sqlite3').verbose();
-const fs = require('fs');
+const sqlite3 = require('sqlite3');
 const path = require('path');
 
-// Database file path
-const dbPath = path.resolve(__dirname, 'greetings.sqlite');
-// SQL initialization file path
-const initSqlPath = path.resolve(__dirname, 'database', 'init.sql');
+const initializeDatabase = () => {
+    const db = new sqlite3.Database(':memory:');
 
-function initializeDatabase() {
-    // Create a new database connection
-    const db = new sqlite3.Database(dbPath, (err) => {
-        if (err) {
-            console.error('Error connecting to database:', err);
-            return;
-        }
-        console.log('Connected to SQLite database');
-    });
+    const initSql = `
+        CREATE TABLE IF NOT EXISTS greetings (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timeOfDay TEXT NOT NULL,
+            language TEXT NOT NULL,
+            greetingMessage TEXT NOT NULL,
+            tone TEXT NOT NULL
+        );
 
-    // Check if initialization SQL file exists
-    if (fs.existsSync(initSqlPath)) {
-        // Read and execute initialization SQL
-        const initSql = fs.readFileSync(initSqlPath, 'utf-8');
-        
-        // Run initialization SQL in a transaction
-        db.serialize(() => {
-            db.exec('BEGIN TRANSACTION');
-            
-            db.exec(initSql, (err) => {
-                if (err) {
-                    console.error('Error initializing database:', err);
-                    db.exec('ROLLBACK');
-                    return;
-                }
-                
-                db.exec('COMMIT');
-                console.log('Database initialized successfully');
-            });
+        INSERT OR IGNORE INTO greetings (timeOfDay, language, greetingMessage, tone) VALUES
+            ('Morning', 'English', 'Good morning', 'Casual'),
+            ('Morning', 'English', 'I wish you a pleasant morning', 'Formal'),
+            ('Afternoon', 'English', 'Good afternoon', 'Casual'),
+            ('Afternoon', 'English', 'I hope you are having a wonderful afternoon', 'Formal'),
+            ('Evening', 'English', 'Good evening', 'Casual'),
+            ('Evening', 'English', 'I wish you a pleasant evening', 'Formal'),
+
+            ('Morning', 'French', 'Bonjour', 'Casual'),
+            ('Morning', 'French', 'Je vous souhaite une bonne matinée', 'Formal'),
+            ('Afternoon', 'French', 'Bon après-midi', 'Casual'),
+            ('Afternoon', 'French', 'Je vous souhaite un bon après-midi', 'Formal'),
+            ('Evening', 'French', 'Bonsoir', 'Casual'),
+            ('Evening', 'French', 'Je vous souhaite une bonne soirée', 'Formal'),
+
+            ('Morning', 'Spanish', 'Buenos días', 'Casual'),
+            ('Morning', 'Spanish', 'Le deseo muy buenos días', 'Formal'),
+            ('Afternoon', 'Spanish', 'Buenas tardes', 'Casual'),
+            ('Afternoon', 'Spanish', 'Le deseo muy buenas tardes', 'Formal'),
+            ('Evening', 'Spanish', 'Buenas noches', 'Casual'),
+            ('Evening', 'Spanish', 'Le deseo muy buenas noches', 'Formal');
+    `;
+
+    return new Promise((resolve, reject) => {
+        db.exec(initSql, (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(db);
+            }
         });
-    } else {
-        console.error('Database initialization SQL file not found');
-    }
+    });
+};
 
-    return db;
-}
-
-// Create and initialize the database
-const db = initializeDatabase();
-
-// Export the database connection
-module.exports = db;
+module.exports = { initializeDatabase };
