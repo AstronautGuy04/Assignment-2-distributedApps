@@ -1,92 +1,43 @@
 const express = require('express');
 const router = express.Router();
-const { initializeDatabase } = require('../database');
+const greetings = require('../data/greetings');
 
-// GET /timesOfDay
-router.get('/timesOfDay', async (req, res) => {
-    try {
-        const db = await initializeDatabase();
-        db.all('SELECT DISTINCT timeOfDay FROM greetings ORDER BY timeOfDay', [], (err, rows) => {
-            if (err) {
-                res.status(500).json({ error: 'Database error', details: err.message });
-                return;
-            }
-            res.json({ timesOfDay: rows.map(row => row.timeOfDay) });
-            db.close();
-        });
-    } catch (error) {
-        res.status(500).json({ error: 'Database initialization error', details: error.message });
-    }
+router.get('/timesOfDay', (req, res) => {
+    const times = [...new Set(greetings.map(g => g.timeOfDay))];
+    res.json({ timesOfDay: times });
 });
 
-// GET /languages
-router.get('/languages', async (req, res) => {
-    try {
-        const db = await initializeDatabase();
-        db.all('SELECT DISTINCT language FROM greetings ORDER BY language', [], (err, rows) => {
-            if (err) {
-                res.status(500).json({ error: 'Database error', details: err.message });
-                return;
-            }
-            res.json({ languages: rows.map(row => row.language) });
-            db.close();
-        });
-    } catch (error) {
-        res.status(500).json({ error: 'Database initialization error', details: error.message });
-    }
+router.get('/languages', (req, res) => {
+    const languages = [...new Set(greetings.map(g => g.language))];
+    res.json({ languages });
 });
 
-// GET /tones
-router.get('/tones', async (req, res) => {
-    try {
-        const db = await initializeDatabase();
-        db.all('SELECT DISTINCT tone FROM greetings ORDER BY tone', [], (err, rows) => {
-            if (err) {
-                res.status(500).json({ error: 'Database error', details: err.message });
-                return;
-            }
-            res.json({ tones: rows.map(row => row.tone) });
-            db.close();
-        });
-    } catch (error) {
-        res.status(500).json({ error: 'Database initialization error', details: error.message });
-    }
+router.get('/tones', (req, res) => {
+    const tones = [...new Set(greetings.map(g => g.tone))];
+    res.json({ tones });
 });
 
-// POST /greet
-router.post('/greet', async (req, res) => {
+router.post('/greet', (req, res) => {
     const { timeOfDay, language, tone } = req.body;
 
     if (!timeOfDay || !language || !tone) {
-        return res.status(400).json({
-            error: 'Missing required fields'
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const greeting = greetings.find(g => 
+        g.timeOfDay === timeOfDay && 
+        g.language === language && 
+        g.tone === tone
+    );
+
+    if (!greeting) {
+        return res.status(404).json({
+            error: 'Greeting not found',
+            details: `No greeting found for timeOfDay: ${timeOfDay}, language: ${language}, tone: ${tone}`
         });
     }
 
-    try {
-        const db = await initializeDatabase();
-        db.get(
-            'SELECT greetingMessage FROM greetings WHERE timeOfDay = ? AND language = ? AND tone = ?',
-            [timeOfDay, language, tone],
-            (err, row) => {
-                if (err) {
-                    res.status(500).json({ error: 'Database error', details: err.message });
-                    return;
-                }
-                if (!row) {
-                    res.status(404).json({
-                        error: 'Greeting not found',
-                        details: `No greeting found for timeOfDay: ${timeOfDay}, language: ${language}, tone: ${tone}`
-                    });
-                    return;
-                }
-                res.json({ greetingMessage: row.greetingMessage });
-                db.close();
-            }
-        );
-    } catch (error) {
-        res.status(500).json({ error: 'Database initialization error', details: error.message });
-    }
+    res.json({ greetingMessage: greeting.greetingMessage });
 });
 
 module.exports = router;
