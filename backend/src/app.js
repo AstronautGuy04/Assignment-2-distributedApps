@@ -1,23 +1,34 @@
 const express = require('express');
-const greetingRoutes = require('./src/routes/greetingRoutes');
+const greetingRoutes = require('./routes/greetingRoutes');
 
 const app = express();
 
 // Middleware
 app.use(express.json());
 
-// API Routes
-app.use('/api', greetingRoutes);
-
-// Test route
+// Root route
 app.get('/', (req, res) => {
-    res.json({ message: 'API is working!' });
+    res.json({ message: 'Welcome to the Greetings API!' });
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+// API Routes - note we're not using /api prefix here
+app.use('/', greetingRoutes);
+
+// 404 handler
+app.use((req, res) => {
+    res.status(404).json({
+        error: 'Not Found',
+        message: 'The requested endpoint does not exist'
+    });
 });
 
-// Export for Vercel
+// Error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({
+        error: 'Internal Server Error',
+        message: err.message || 'Something went wrong!'
+    });
+});
+
 module.exports = app;
