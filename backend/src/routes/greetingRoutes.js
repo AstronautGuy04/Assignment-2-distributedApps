@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 // In-memory data store
@@ -13,9 +13,8 @@ const greetings = [
 ];
 
 // Routes
-
 // Test route for root endpoint
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.json({ message: 'Welcome to the Greetings API' });
 });
 
@@ -59,4 +58,4 @@ router.post('/greet', (req, res) => {
     res.json({ greetingMessage: greeting.greetingMessage });
 });
 
-module.exports = router;
+export default router
