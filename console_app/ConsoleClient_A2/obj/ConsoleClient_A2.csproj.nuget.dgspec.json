@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pu040\\OneDrive\\Desktop\\Programming Distributed Application\\Assignment-2-distributedApps\\console_app\\ConsoleClient_A2\\ConsoleClient_A2.csproj": {}
+    "C:\\Users\\pu040\\OneDrive\\Desktop\\Assignmnet-3\\Assignment-2-distributedApps\\console_app\\ConsoleClient_A2\\ConsoleClient_A2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pu040\\OneDrive\\Desktop\\Programming Distributed Application\\Assignment-2-distributedApps\\console_app\\ConsoleClient_A2\\ConsoleClient_A2.csproj": {
+    "C:\\Users\\pu040\\OneDrive\\Desktop\\Assignmnet-3\\Assignment-2-distributedApps\\console_app\\ConsoleClient_A2\\ConsoleClient_A2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pu040\\OneDrive\\Desktop\\Programming Distributed Application\\Assignment-2-distributedApps\\console_app\\ConsoleClient_A2\\ConsoleClient_A2.csproj",
+        "projectUniqueName": "C:\\Users\\pu040\\OneDrive\\Desktop\\Assignmnet-3\\Assignment-2-distributedApps\\console_app\\ConsoleClient_A2\\ConsoleClient_A2.csproj",
         "projectName": "ConsoleClient_A2",
-        "projectPath": "C:\\Users\\pu040\\OneDrive\\Desktop\\Programming Distributed Application\\Assignment-2-distributedApps\\console_app\\ConsoleClient_A2\\ConsoleClient_A2.csproj",
+        "projectPath": "C:\\Users\\pu040\\OneDrive\\Desktop\\Assignmnet-3\\Assignment-2-distributedApps\\console_app\\ConsoleClient_A2\\ConsoleClient_A2.csproj",
         "packagesPath": "C:\\Users\\pu040\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pu040\\OneDrive\\Desktop\\Programming Distributed Application\\Assignment-2-distributedApps\\console_app\\ConsoleClient_A2\\obj\\",
+        "outputPath": "C:\\Users\\pu040\\OneDrive\\Desktop\\Assignmnet-3\\Assignment-2-distributedApps\\console_app\\ConsoleClient_A2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pu040\\AppData\\Roaming\\NuGet\\NuGet.Config",

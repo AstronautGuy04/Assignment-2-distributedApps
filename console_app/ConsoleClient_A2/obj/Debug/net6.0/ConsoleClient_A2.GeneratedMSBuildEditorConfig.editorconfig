@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ConsoleClient_A2
-build_property.ProjectDir = C:\Users\pu040\OneDrive\Desktop\Programming Distributed Application\Assignment-2-distributedApps\console_app\ConsoleClient_A2\
+build_property.ProjectDir = C:\Users\pu040\OneDrive\Desktop\Assignmnet-3\Assignment-2-distributedApps\console_app\ConsoleClient_A2\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

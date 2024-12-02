@@ -1,7 +1,10 @@
 import express from 'express';
 import greetingRoutes from './routes/greetingRoutes.js';
+import cors from 'cors';
 
 export const app = express();
+
+app.use(cors({origin: "*"}));
 
 // Middleware to parse JSON bodies
 app.use(express.json());

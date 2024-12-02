@@ -10,7 +10,7 @@ namespace GreetingsConsoleClient
     class Program
     {
         private static readonly HttpClient client = new HttpClient();
-        private const string API_BASE_URL = "http://localhost:3000/api";
+        private const string API_BASE_URL = "https://assignment-2-distributed-apps-mtlg-owllxdng8.vercel.app/api";
 
         // Updated model with correct property names
         public class GreetingRequest
