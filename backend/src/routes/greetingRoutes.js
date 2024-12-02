@@ -13,6 +13,12 @@ const greetings = [
 ];
 
 // Routes
+
+// Test route for root endpoint
+app.get('/', (req, res) => {
+    res.json({ message: 'Welcome to the Greetings API' });
+});
+
 router.get('/timesOfDay', (req, res) => {
     const times = [...new Set(greetings.map(g => g.timeOfDay))];
     res.json({ timesOfDay: times });

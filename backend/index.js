@@ -9,10 +9,6 @@ app.use(express.json());
 // Mount the API routes
 app.use('/api', greetingRoutes);
 
-// Test route for root endpoint
-app.get('/', (req, res) => {
-    res.json({ message: 'Welcome to the Greetings API' });
-});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
