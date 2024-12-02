@@ -1,7 +1,7 @@
 # Multilingual Greetings API
 
 A Node.js API that provides greetings in multiple languages based on time of day and tone preferences.
-
+VERCEL URL - https://assignment-2-distributed-apps.vercel.app
 ## Table of Contents
 - [Setup](#setup)
 - [API Endpoints](#api-endpoints)
@@ -26,7 +26,7 @@ The server will run on `http://localhost:3000`
 ### 1. Get Times of Day
 Returns all available times of day.
 
-- **URL:** `/api/timesOfDay`
+- **URL:** `https://assignment-2-distributed-apps.vercel.app/api/timesOfDay`
 - **Method:** `GET`
 - **URL Params:** None
 - **Success Response:**
@@ -43,7 +43,7 @@ Returns all available times of day.
 ### 2. Get Supported Languages
 Returns all supported languages.
 
-- **URL:** `/api/languages`
+- **URL:** `https://assignment-2-distributed-apps.vercel.app/api/languages`
 - **Method:** `GET`
 - **URL Params:** None
 - **Success Response:**
@@ -60,7 +60,7 @@ Returns all supported languages.
 ### 3. Get Available Tones
 Returns all available tones.
 
-- **URL:** `/api/tones`
+- **URL:** `https://assignment-2-distributed-apps.vercel.app/api/tones`
 - **Method:** `GET`
 - **URL Params:** None
 - **Success Response:**
@@ -76,7 +76,7 @@ Returns all available tones.
 ### 4. Get Greeting
 Returns a greeting based on the provided parameters.
 
-- **URL:** `/api/greet`
+- **URL:** `https://assignment-2-distributed-apps.vercel.app/api/greet`
 - **Method:** `POST`
 - **Content-Type:** `application/json`
 - **Request Body:**
@@ -99,7 +99,7 @@ Returns a greeting based on the provided parameters.
 ### Example 1: Getting a Formal Morning Greeting in English
 **Request:**
 ```bash
-curl -X POST http://localhost:3000/api/greet \
+curl -X POST https://assignment-2-distributed-apps.vercel.app/api/greet \
 -H "Content-Type: application/json" \
 -d '{
     "timeOfDay": "Morning",
@@ -118,7 +118,7 @@ curl -X POST http://localhost:3000/api/greet \
 ### Example 2: Getting a Casual Evening Greeting in Spanish
 **Request:**
 ```bash
-curl -X POST http://localhost:3000/api/greet \
+curl -X POST https://assignment-2-distributed-apps.vercel.app/api/greet \
 -H "Content-Type: application/json" \
 -d '{
     "timeOfDay": "Evening",
